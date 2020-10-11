@@ -23,8 +23,8 @@ namespace FinalHealthTourism.Controllers
             var admin = db.Admins.FirstOrDefault(m => m.Id == a.Id && m.Password == a.Password);
             if (admin != null)
             {
-                ViewBag.Message = "Login Successful";
-                return RedirectToAction("AdminDashboard");
+                TempData["currentAdmin"] = admin.Id;
+                return RedirectToAction("DisplayPatients", "Patient");
             }
             else
             {
@@ -33,10 +33,5 @@ namespace FinalHealthTourism.Controllers
             return View();
         }
 
-        public ActionResult AdminDashboard()
-        {
-            return RedirectToAction("DisplayPatients", "Patient");
-            /*return View("AdminDashboard");*/
-        }
     }
 }

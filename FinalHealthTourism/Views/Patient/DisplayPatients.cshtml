@@ -1,0 +1,70 @@
+﻿@model IEnumerable<FinalHealthTourism.Models.Patient>
+
+@{
+    ViewBag.Title = "DisplayPatients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>All Patients</h2>
+
+ 
+<table id="mytable" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Date Of Birth</th>
+        <th>Gender</th>
+        <th>Contact Number</th>
+        <th>Email Id</th>
+        <th>Password</th>
+        <th>Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.FirstName</td>
+            <td>@p.LastName</td>
+            <td>@p.DateOfBirth</td>
+            <td>@p.Gender</td>
+            <td>@p.ContactNumber</td>
+            <td>@p.Email</td>
+            <td>@p.Password</td>
+            <td>
+                <button class="btn btn-primary">Edit</button>
+                <button data-patient-id="@p.Id"class="btn btn-danger js-delete">Delete</button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#mytable").DataTable();
+
+            $("#mytable").on("click",
+                ".js-delete",
+                function() {
+                    var button = $(this);
+                    bootbox.confirm("Are you sure you want to delete the record?",
+                        function(result) {
+                            if (result) {
+
+                                $.ajax({
+                                    url: "/Patient/Delete/" + button.attr("data-patient-id"),
+                                    method: "POST",
+                                    success: function() {
+                                        button.parents("tr").remove();
+                                    }
+
+                                });
+                            }
+                        })
+                })
+        });
+    </script>
+}

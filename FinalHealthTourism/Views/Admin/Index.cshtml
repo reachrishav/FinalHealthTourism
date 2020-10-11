@@ -1,0 +1,36 @@
+﻿@model FinalHealthTourism.Models.Admin
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    table, td {
+        padding: 20px;
+    }
+</style>
+<h2>Admin Login</h2>
+<center>
+    <b>
+        @ViewBag.Message
+    </b>
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+        <table>
+                <tr>
+                    <td>@Html.LabelFor(model => model.Id)</td>
+                    <td>@Html.EditorFor(model => model.Id)</td>
+                    <td>@Html.ValidationMessageFor(model => model.Id)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.Password)</td>
+                    <td>@Html.EditorFor(model => model.Password)</td>
+                    <td>@Html.ValidationMessageFor(model => model.Password)</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+            </table>
+    }
+</center>

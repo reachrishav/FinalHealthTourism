@@ -24,7 +24,8 @@ namespace FinalHealthTourism.Controllers
             if (admin != null)
             {
                 TempData["currentAdmin"] = admin.Id;
-                return RedirectToAction("DisplayPatients", "Patient");
+                /*return RedirectToAction("DisplayPatients", "Patient");*/
+                return View("AdminDashboard", db.HospitalAdmins.ToList());
             }
             else
             {
@@ -32,6 +33,5 @@ namespace FinalHealthTourism.Controllers
             }
             return View();
         }
-
     }
 }

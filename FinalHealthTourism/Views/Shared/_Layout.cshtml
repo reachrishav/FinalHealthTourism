@@ -31,10 +31,15 @@
                 @Html.ActionLink("Health Tourism", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                @*<ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
                     <li>@Html.ActionLink("Add Patient", "Add", "Patient")</li>
+                    
+                </ul>*@
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                    <li>@Html.ActionLink("Register", "Register", "Home")</li>
                 </ul>
             </div>
         </div>

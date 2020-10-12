@@ -129,6 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HospitalAdminController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -141,9 +142,18 @@
     <Compile Include="Migrations\202010100724116_AddedAnnotations.designer.cs">
       <DependentUpon>202010100724116_AddedAnnotations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010111756303_Added_DoctorAndHospitalAdminTables.cs" />
+    <Compile Include="Migrations\202010111756303_Added_DoctorAndHospitalAdminTables.designer.cs">
+      <DependentUpon>202010111756303_Added_DoctorAndHospitalAdminTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010120538434_AddIsApprovedToHospitalAdmin.cs" />
+    <Compile Include="Migrations\202010120538434_AddIsApprovedToHospitalAdmin.designer.cs">
+      <DependentUpon>202010120538434_AddIsApprovedToHospitalAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Doctor.cs" />
+    <Compile Include="Models\HospitalAdmin.cs" />
     <Compile Include="Models\MedicalTourismContext.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -433,6 +443,12 @@
     <Content Include="Views\Patient\DisplayPatients.cshtml" />
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Patient\Success.cshtml" />
+    <Content Include="Views\HospitalAdmin\HospitalAdminLogin.cshtml" />
+    <Content Include="Views\HospitalAdmin\HospitalAdminSignUp.cshtml" />
+    <Content Include="Views\HospitalAdmin\Success.cshtml" />
+    <Content Include="Views\HospitalAdmin\HospitalAdminDashboard.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -452,6 +468,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010100724116_AddedAnnotations.resx">
       <DependentUpon>202010100724116_AddedAnnotations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010111756303_Added_DoctorAndHospitalAdminTables.resx">
+      <DependentUpon>202010111756303_Added_DoctorAndHospitalAdminTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010120538434_AddIsApprovedToHospitalAdmin.resx">
+      <DependentUpon>202010120538434_AddIsApprovedToHospitalAdmin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

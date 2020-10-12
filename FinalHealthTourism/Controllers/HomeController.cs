@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace FinalHealthTourism.Controllers
 {
@@ -13,17 +9,12 @@ namespace FinalHealthTourism.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Login()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
-
-        public ActionResult Contact()
+        public ActionResult Register()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

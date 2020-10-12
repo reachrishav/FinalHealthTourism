@@ -1,8 +1,130 @@
-﻿@{
+﻿@model List<FinalHealthTourism.Models.HospitalAdmin>
+@{
     ViewBag.Title = "AdminDashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .btn-primary {
+        background-color: lightgreen;
+        border: 1px solid white;
+    }
 
-<h2>Admin Dashboard</h2>
+    .btn-danger {
+        border: 1px solid white;
+    }
 
-@RenderPage("~/Views/Patient/DisplayPatients.cshtml")
+    .btn-all {
+        background-color: lightblue;
+        color: white;
+    }
+</style>
+@{
+    string adminName = char.ToUpper(TempData["currentAdmin"].ToString()[0]) + TempData["currentAdmin"].ToString().Substring(1);
+}
+<h2>Admin Dashboard for @adminName</h2>
+
+<table id="mytable" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Hospital Name</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip Code</th>
+            <th>Certification</th>
+            <th>Achievements</th>
+            <th>Specialities</th>
+            <th>Facilities Available</th>
+            <th>Grant/Revoke</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ha in Model)
+        {
+            if (!ha.IsApproved)
+            {
+                <tr>
+                    <td>@ha.HospitalName</td>
+                    <td>@ha.City</td>
+                    <td>@ha.State</td>
+                    <td>@ha.ZipCode</td>
+                    <td>@ha.Certification</td>
+                    <td>@ha.Achievements</td>
+                    <td>@ha.Specialities</td>
+                    <td>@ha.FacilitiesAvailable</td>
+                    <td>
+                        <button data-hadmin-id="@ha.Id" class="btn btn-primary js-approve">Approve</button>
+                        <button data-hadmin-id="@ha.Id" class="btn btn-danger js-reject">Reject</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br />
+<br />
+<a class="btn btn-all" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    View All Hospital Admins
+</a>
+<br />
+<br />
+<div class="collapse" id="collapseExample">
+    <table id="allHAdmins" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Hospital Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+                <th>Certification</th>
+                <th>Achievements</th>
+                <th>Specialities</th>
+                <th>Facilities Available</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ha in Model)
+            {
+                <tr>
+                    <td>@ha.HospitalName</td>
+                    <td>@ha.City</td>
+                    <td>@ha.State</td>
+                    <td>@ha.ZipCode</td>
+                    <td>@ha.Certification</td>
+                    <td>@ha.Achievements</td>
+                    <td>@ha.Specialities</td>
+                    <td>@ha.FacilitiesAvailable</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#mytable").DataTable();
+            $("#allHAdmins").DataTable();
+
+            $("#mytable").on("click",
+                ".js-approve",
+                function () {
+                    var button = $(this);
+                    bootbox.confirm("Are you sure you want to approve the Hospital Admin?",
+                        function (result) {
+                            if (result) {
+
+                                $.ajax({
+                                    url: "/HospitalAdmin/Approve/" + button.attr("data-hadmin-id"),
+                                    method: "POST",
+                                    success: function () {
+                                        button.parents("tr").remove();
+                                    }
+
+                                });
+                            }
+                        })
+                })
+        });
+    </script>
+}

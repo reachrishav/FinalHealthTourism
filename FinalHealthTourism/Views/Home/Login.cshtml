@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .mycontainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 500px;
+    }
+    .btn-1{
+        background-color: grey;
+        width: 50%;
+        color: white;
+        border: 2px solid black;
+    }
+</style>
+
+<h2 class="text-center">Login</h2><br/><br/>
+
+<div class="mycontainer">
+    <a href="/HospitalAdmin/HospitalAdminLogin/" class="btn btn-1">Login as Hospital Admin</a>
+    <a href="/Doctor/DoctorLogin/" class="btn btn-1">Login as Doctor</a>
+    <a href="/Patient/PatientLogin/" class="btn btn-1">Login as Patient</a>
+    <a href="/Admin" class="btn btn-1">Login as Super User</a>
+</div>

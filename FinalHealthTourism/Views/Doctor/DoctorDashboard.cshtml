@@ -1,0 +1,18 @@
+﻿@model FinalHealthTourism.Models.Doctor
+@{
+    ViewBag.Title = "PatientDashboard";
+    Layout = "~/Views/Shared/_LogoutLayout.cshtml";
+}
+
+@{
+    string dName = char.ToUpper(TempData["currentDoctor"].ToString()[0]) + TempData["currentDoctor"].ToString().Substring(1);
+}
+<h2>Welcome Dr. @dName</h2>
+
+<a class="btn btn-primary" href="@Url.Action("UpdateDetails", "Doctor", new { id = Model.Id })">Update Your Details</a>
+
+<a class="btn btn-success" href="@Url.Action("MyAppointments", "Doctor", new { id = Model.Id })">View Appointments</a>
+
+
+<a class="btn btn-success" href="@Url.Action("MyTreatmentRecords", "Doctor", new { id = Model.Id })">Your Treatment Records</a>
+

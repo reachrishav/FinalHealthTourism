@@ -1,0 +1,92 @@
+﻿@using System.Collections
+@model FinalHealthTourism.Models.Doctor
+@{
+    ViewBag.Title = "UpdateDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Update Your Details</h2>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="form-horizontal">
+        <hr />
+        @*@Html.HiddenFor(model => model.Id)
+            @Html.DisplayFor(model => model.Id)
+
+            @Html.HiddenFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.FirstName)
+
+            @Html.HiddenFor(model => model.LastName)
+            @Html.DisplayFor(model => model.LastName)
+
+            @Html.HiddenFor(model => model.DateOfBirth)
+            @Html.DisplayFor(model => model.DateOfBirth)
+
+            @Html.HiddenFor(model => model.ContactNumber)
+            @Html.DisplayFor(model => model.ContactNumber)
+
+            @Html.HiddenFor(model => model.Gender)
+            @Html.DisplayFor(model => model.Gender)
+
+            @Html.HiddenFor(model => model.Email)
+            @Html.DisplayFor(model => model.Email)
+
+            @Html.HiddenFor(model => model.Password)
+            @Html.DisplayFor(model => model.Password)
+        *@
+
+        <div class="form-group">
+            @Html.HiddenFor(model => model.DateOfBirth)
+            @*@Html.DisplayFor(model => model.DateOfBirth)*@
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.HospitalAssociated, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("HospitalAssociated",
+                    new SelectList((List<string>)ViewBag.HospitalAdmins),
+                    "Select Hospital Associated",
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.HospitalAssociated, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Speciality, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Speciality",
+                    new List<SelectListItem>()
+                    {
+                        new SelectListItem {Text = "Cardiology"},
+                        new SelectListItem {Text = "Surgery"},
+                        new SelectListItem {Text = "Infectious disease"},
+                        new SelectListItem {Text = "Nutrition"},
+                        new SelectListItem {Text = "Gynecology"},
+                        new SelectListItem {Text = "Neurosurgery"},
+                        new SelectListItem {Text = "Pulmonology"},
+                    },
+                    "Select Speciality",
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Speciality, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FromDateTimeAvailable, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FromDateTimeAvailable, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FromDateTimeAvailable, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ToDateTimeAvailable, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ToDateTimeAvailable, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ToDateTimeAvailable, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

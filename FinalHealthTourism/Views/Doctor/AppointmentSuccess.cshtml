@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_LogoutLayout.cshtml";
+}
+
+<style>
+    .blank_row {
+        height: 30px; /* overwrites any other rules */
+        background-color: #FFFFFF;
+    }
+
+    .ptable {
+        margin-top: 100px;
+        margin-left: 40px;
+        margin-right: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<div class="ptable">
+    <table>
+        <tr colspan="2">
+            <td><h2 class="text-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;&nbsp;Details Successfully Updated</h2></td>
+        </tr>
+        <tr class="blank_row">
+            <td></td>
+        </tr>
+    </table>
+</div>

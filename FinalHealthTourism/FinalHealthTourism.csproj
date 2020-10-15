@@ -53,6 +53,9 @@
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -128,6 +131,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HospitalAdminController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
@@ -150,13 +154,60 @@
     <Compile Include="Migrations\202010120538434_AddIsApprovedToHospitalAdmin.designer.cs">
       <DependentUpon>202010120538434_AddIsApprovedToHospitalAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010121346092_AddHospitalAssociatedToDoctor.cs" />
+    <Compile Include="Migrations\202010121346092_AddHospitalAssociatedToDoctor.designer.cs">
+      <DependentUpon>202010121346092_AddHospitalAssociatedToDoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010131952066_AddAppointmentModel.cs" />
+    <Compile Include="Migrations\202010131952066_AddAppointmentModel.designer.cs">
+      <DependentUpon>202010131952066_AddAppointmentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010140624088_AddedForeignKeyToDoctor.cs" />
+    <Compile Include="Migrations\202010140624088_AddedForeignKeyToDoctor.designer.cs">
+      <DependentUpon>202010140624088_AddedForeignKeyToDoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010141442087_AddedTreatmentRecords.cs" />
+    <Compile Include="Migrations\202010141442087_AddedTreatmentRecords.designer.cs">
+      <DependentUpon>202010141442087_AddedTreatmentRecords.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010141710542_RemovedForeignKey.cs" />
+    <Compile Include="Migrations\202010141710542_RemovedForeignKey.designer.cs">
+      <DependentUpon>202010141710542_RemovedForeignKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010142047440_AddedRequiredAttributeToPatient.cs" />
+    <Compile Include="Migrations\202010142047440_AddedRequiredAttributeToPatient.designer.cs">
+      <DependentUpon>202010142047440_AddedRequiredAttributeToPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010150428510_AddRevisitColumnToTreatment.cs" />
+    <Compile Include="Migrations\202010150428510_AddRevisitColumnToTreatment.designer.cs">
+      <DependentUpon>202010150428510_AddRevisitColumnToTreatment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010150447310_AddRequiredAttributesToDoctorAndHospital.cs" />
+    <Compile Include="Migrations\202010150447310_AddRequiredAttributesToDoctorAndHospital.designer.cs">
+      <DependentUpon>202010150447310_AddRequiredAttributesToDoctorAndHospital.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010150735525_PasswordMigration.cs" />
+    <Compile Include="Migrations\202010150735525_PasswordMigration.designer.cs">
+      <DependentUpon>202010150735525_PasswordMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010150741096_AddedRequiredToPasswordAgain.cs" />
+    <Compile Include="Migrations\202010150741096_AddedRequiredToPasswordAgain.designer.cs">
+      <DependentUpon>202010150741096_AddedRequiredToPasswordAgain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\HospitalAdmin.cs" />
     <Compile Include="Models\MedicalTourismContext.cs" />
     <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\TreatmentRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AppointmentViewModel.cs" />
+    <Compile Include="ViewModels\DisplayTreatmentViewModel.cs" />
+    <Compile Include="ViewModels\DoctorUpdateViewModel.cs" />
+    <Compile Include="ViewModels\ShowTreatmentRecordViewModel.cs" />
+    <Compile Include="ViewModels\TreatmentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -319,11 +370,56 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -336,6 +432,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -418,6 +515,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -439,7 +538,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
-    <Content Include="Views\Patient\Add.cshtml" />
+    <Content Include="Views\Patient\PatientSignUp.cshtml" />
     <Content Include="Views\Patient\DisplayPatients.cshtml" />
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Patient\Success.cshtml" />
@@ -449,6 +548,26 @@
     <Content Include="Views\HospitalAdmin\HospitalAdminDashboard.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Patient\PatientLogin.cshtml" />
+    <Content Include="Views\Patient\PatientDashboard.cshtml" />
+    <Content Include="Views\Shared\_LogoutLayout.cshtml" />
+    <Content Include="Views\Doctor\DoctorSignUp.cshtml" />
+    <Content Include="Views\Doctor\Success.cshtml" />
+    <Content Include="Views\Doctor\DoctorLogin.cshtml" />
+    <Content Include="Views\Doctor\DoctorDashboard.cshtml" />
+    <Content Include="Views\Doctor\UpdateDetails.cshtml" />
+    <Content Include="Views\Doctor\UpdateDetails1.cshtml" />
+    <Content Include="Views\Doctor\UpdateSuccess.cshtml" />
+    <Content Include="Views\Patient\AppointmentSuccess.cshtml" />
+    <Content Include="Views\Doctor\MyAppointments.cshtml" />
+    <Content Include="Views\Doctor\PatientSchedule.cshtml" />
+    <Content Include="Views\Doctor\AppointmentSuccess.cshtml" />
+    <Content Include="Views\Doctor\MyTreatmentRecords.cshtml" />
+    <Content Include="Views\Doctor\UpdateTreatment.cshtml" />
+    <Content Include="Views\Patient\MyTreatment.cshtml" />
+    <Content Include="Views\Patient\NotYetGiven.cshtml" />
+    <Content Include="Views\HospitalAdmin\UpdateSchedule.cshtml" />
+    <Content Include="Views\HospitalAdmin\UpdateSuccessful.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -474,6 +593,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010120538434_AddIsApprovedToHospitalAdmin.resx">
       <DependentUpon>202010120538434_AddIsApprovedToHospitalAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010121346092_AddHospitalAssociatedToDoctor.resx">
+      <DependentUpon>202010121346092_AddHospitalAssociatedToDoctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010131952066_AddAppointmentModel.resx">
+      <DependentUpon>202010131952066_AddAppointmentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010140624088_AddedForeignKeyToDoctor.resx">
+      <DependentUpon>202010140624088_AddedForeignKeyToDoctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010141442087_AddedTreatmentRecords.resx">
+      <DependentUpon>202010141442087_AddedTreatmentRecords.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010141710542_RemovedForeignKey.resx">
+      <DependentUpon>202010141710542_RemovedForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010142047440_AddedRequiredAttributeToPatient.resx">
+      <DependentUpon>202010142047440_AddedRequiredAttributeToPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010150428510_AddRevisitColumnToTreatment.resx">
+      <DependentUpon>202010150428510_AddRevisitColumnToTreatment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010150447310_AddRequiredAttributesToDoctorAndHospital.resx">
+      <DependentUpon>202010150447310_AddRequiredAttributesToDoctorAndHospital.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010150735525_PasswordMigration.resx">
+      <DependentUpon>202010150735525_PasswordMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010150741096_AddedRequiredToPasswordAgain.resx">
+      <DependentUpon>202010150741096_AddedRequiredToPasswordAgain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

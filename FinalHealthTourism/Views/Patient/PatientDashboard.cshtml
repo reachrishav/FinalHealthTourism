@@ -1,0 +1,95 @@
+﻿@model List<FinalHealthTourism.Models.Doctor>
+@{
+    ViewBag.Title = "PatientDashboard";
+    Layout = "~/Views/Shared/_LogoutLayout.cshtml";
+}
+
+@{
+    string pName = char.ToUpper(TempData["currentPatient"].ToString()[0]) + TempData["currentPatient"].ToString().Substring(1);
+    string patId = TempData["currentPatientId"].ToString();
+    string NotAvailable = "NA";
+}
+<h2>Patient Dashboard for @pName</h2>
+
+<h3>All Doctors Available</h3>
+
+<table id="mytable" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>Specialty</th>
+        <th>Hospital Associated</th>
+        <th>Locality</th>
+        <th>Facilities</th>
+        <th>Available From</th>
+        <th>Available To</th>
+        <th>Appointment</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var d in Model)
+    {
+        <tr>
+            <td>@d.FirstName</td>
+            <td>@d.LastName</td>
+            <td>@d.Gender</td>
+            <td>@d.Speciality</td>
+            <td>
+                @if (d.HospitalAdminId != null)
+                {
+                    @d.HospitalAdmin.HospitalName
+                }
+                else
+                {
+                    @NotAvailable
+                }
+            </td>
+            <td>
+                @if (d.HospitalAdminId != null)
+                {
+                    @d.HospitalAdmin.City
+                }
+                else
+                {
+                    @NotAvailable
+                }
+            </td>
+            <td>
+                @if (d.HospitalAdminId != null)
+                {
+                    @d.HospitalAdmin.FacilitiesAvailable
+                }
+                else
+                {
+                    @NotAvailable
+                }
+            </td>
+            <td>@d.FromDateTimeAvailable</td>
+            <td>@d.ToDateTimeAvailable</td>
+            <td>
+                @Html.ActionLink("Make Appointment","Appointment","Patient",new{dId=d.Id,pId=patId},new{@class="btn btn-primary"})
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@Html.ActionLink("Show my Treatment","MyTreatment","Patient",new{id=patId},new{ @class="btn btn-primary" })
+@*<a class="btn btn-primary" data-toggle="collapse" href="#treatmentPlan" role="button" aria-expanded="false" aria-controls="treatmentPlan">
+    View Treatment Plan
+</a>
+
+<div id="treatmentPlan" class="collapse">
+</div>*@
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#mytable").DataTable();
+
+        });
+    </script>
+}

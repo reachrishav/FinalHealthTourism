@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Success";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LogoutLayout.cshtml";
 }
 
 <style>
@@ -29,8 +29,8 @@
         </tr>
         <tr>
             <td>
-                <a class="btn btn-primary" href="/Patient/Add"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Add another Patient</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-default" href="/Admin/Index"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;Admin Login</a>
+                <a class="btn btn-primary" href="/Patient/PatientSignUp"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Add another Patient</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-default" href="/Patient/PatientLogin"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;Patient Login</a>
             </td>
         </tr>
     </table>

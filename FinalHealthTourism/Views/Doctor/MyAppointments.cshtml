@@ -1,0 +1,155 @@
+﻿@model IEnumerable<FinalHealthTourism.Models.Appointment>
+
+@{
+    ViewBag.Title = "DisplayPatients";
+    Layout = "~/Views/Shared/_LogoutLayout.cshtml";
+}
+
+@*<h2>Welcome @TempData["currentAdmin"]</h2>*@
+<style>
+    .spacing {
+        height: 20px;
+    }
+    .btn-gr {
+        background-color: #6761A8;
+        color: white;
+    }
+    .btn-3 {
+        background-color: #04471C;
+        color: white;
+    }
+    .btn-2 {
+        background-color: #009DDC;
+        color: white;
+    }
+</style>
+<h2>Your Appointments</h2>
+<div class="spacing"></div>
+<a class="btn btn-danger" data-toggle="collapse" href="#pendingTable" role="button" aria-expanded="false" aria-controls="pendingTable">
+    Pending Appointments
+</a>
+<a class="btn btn-gr" data-toggle="collapse" href="#approvedTable" role="button" aria-expanded="false" aria-controls="approvedTable">
+    Approved Appointments
+</a>
+
+<div id="pendingTable" class="collapse">
+    <div class="spacing"></div>
+    <h4>Your Pending Appointments</h4>
+    <div class="spacing"></div>
+    <table id="p-table" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Patient First Name</th>
+                <th>Patient Last Name</th>
+                <th>Patient Gender</th>
+                <th>Patient Contact Number</th>
+                <th>Patient Email Id</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in Model)
+            {
+                if (!a.AppointmentApproved)
+                {
+                    <tr>
+                        <td>@a.Patient.FirstName</td>
+                        <td>@a.Patient.LastName</td>
+                        <td>@a.Patient.Gender</td>
+                        <td>@a.Patient.ContactNumber</td>
+                        <td>@a.Patient.Email</td>
+                        <td>
+                            <button data-patient-id="@a.Id" class="btn btn-3 js-delete">Approve</button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<div id="approvedTable" class="collapse">
+    <div class="spacing"></div>
+    <h4>Your Approved Appointments</h4>
+    <div class="spacing"></div>
+    <table id="a-table" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Patient First Name</th>
+                <th>Patient Last Name</th>
+                <th>Patient Gender</th>
+                <th>Patient Contact Number</th>
+                <th>Patient Email Id</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in Model)
+            {
+                if (a.AppointmentApproved)
+                {
+                    <tr>
+                        <td>@a.Patient.FirstName</td>
+                        <td>@a.Patient.LastName</td>
+                        <td>@a.Patient.Gender</td>
+                        <td>@a.Patient.ContactNumber</td>
+                        <td>@a.Patient.Email</td>
+                        <td>
+                            @Html.ActionLink("Set Schedule","PatientSchedule","Doctor",new{id=a.Id}, new{@class="btn btn-2"})
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+
+
+            $("#p-table").DataTable();
+            $("#a-table").DataTable();
+
+            $("#p-table").on("click",
+                ".js-delete",
+                function() {
+                    var button = $(this);
+                    bootbox.confirm("Are you sure you want to approve the record?",
+                        function(result) {
+                            if (result) {
+
+                                $.ajax({
+                                    url: "/Doctor/Approve/" + button.attr("data-patient-id"),
+                                    method: "POST",
+                                    success: function() {
+                                        button.parents("tr").remove();
+                                    }
+
+                                });
+                            }
+                        })
+                })
+            $("#a-table").on("click",
+                ".js-delete",
+                function() {
+                    var button = $(this);
+                    bootbox.confirm("Are you sure you want to approve the record?",
+                        function(result) {
+                            if (result) {
+
+                                $.ajax({
+                                    url: "/Doctor/PatientSchedule/" + button.attr("data-patient-id"),
+                                    method: "GET",
+                                    success: function() {
+                                        //button.parents("tr").remove();
+                                    }
+
+                                });
+                            }
+                        })
+                })
+
+        });
+    </script>
+}

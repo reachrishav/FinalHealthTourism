@@ -1,0 +1,93 @@
+﻿@*@model FinalHealthTourism.Models.TreatmentRecord*@
+@model FinalHealthTourism.ViewModels.TreatmentViewModel
+@{
+    ViewBag.Title = "UpdateDetails";
+    Layout = "~/Views/Shared/_LogoutLayout.cshtml";
+}
+<style>
+    .spacing {
+        width: 10px;
+    }
+</style>
+<h2>Add/Update Patient Schedule</h2>
+<h4>Patient Details</h4>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.FirstName)
+            <div class="spacingg"></div>
+                @Html.DisplayFor(model => model.Patient.FirstName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.LastName)
+            <div class="spacingg"></div>
+            @Html.DisplayFor(model => model.Patient.LastName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.Gender)
+            <div class="spacingg"></div>
+            @Html.DisplayFor(model => model.Patient.Gender)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.ContactNumber)
+            <div class="spacingg"></div>
+            @Html.DisplayFor(model => model.Patient.ContactNumber)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.Email)
+            <div class="spacingg"></div>
+            @Html.DisplayFor(model => model.Patient.Email)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.DateOfBirth)
+            <div class="spacingg"></div>
+
+            @Html.DisplayFor(model => model.Patient.DateOfBirth)
+        </div>
+    </div>
+    @*@Html.HiddenFor(model=>model.Doctor.Id)
+    @Html.HiddenFor(model=>model.Patient.Id)
+    @Html.HiddenFor(model=>model.PatientId)
+    @Html.HiddenFor(model=>model.DoctorId)*@
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TreatmentRecord.DiagnosisDetails, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TreatmentRecord.DiagnosisDetails, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TreatmentRecord.DiagnosisDetails, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TreatmentRecord.TreatmentPlanned, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TreatmentRecord.TreatmentPlanned, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TreatmentRecord.TreatmentPlanned, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TreatmentRecord.MedicinesPrescribed, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TreatmentRecord.MedicinesPrescribed, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TreatmentRecord.MedicinesPrescribed, "", new { @class = "text-danger" })
+            </div>
+        </div> 
+        <div class="form-group">
+            @Html.LabelFor(model => model.TreatmentRecord.RevisitDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TreatmentRecord.RevisitDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TreatmentRecord.RevisitDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

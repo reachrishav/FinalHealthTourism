@@ -1,0 +1,80 @@
+﻿@model FinalHealthTourism.ViewModels.ShowTreatmentRecordViewModel
+@{
+    ViewBag.Title = "MyTreatment";
+    Layout = "~/Views/Shared/_LogoutLayout.cshtml";
+}
+<h2>My Treatment Report</h2>
+
+<div class="form-horizontal">
+    <hr />
+    <div class="form-group">
+        <label class="control-label col-md-2">Patient Id</label>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Patient.Id, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Patient Name</label>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Patient.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Doctor Id</label>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Doctor.Id, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Doctor Name</label>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Doctor.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Doctor Specialty</label>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Doctor.Speciality, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Disease/Diagnosis</label>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.TreatmentRecord.DiagnosisDetails, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Treatment Details</label>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.TreatmentRecord.TreatmentPlanned, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Prescription</label>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.TreatmentRecord.MedicinesPrescribed, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    @if(Model.TreatmentRecord.RevisitDate!=null)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2">Revisit Date</label>
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.TreatmentRecord.RevisitDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2">Revisit Date</label>
+            <div class="col-md-10">
+                NA
+            </div>
+        </div>
+    }
+</div>
+
+
+
+@Html.ActionLink("Download Your Report","ExportAsPdf","Patient",new{pId=Model.Patient.Id},new{@class="btn btn-success"})

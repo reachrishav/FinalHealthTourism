@@ -20,17 +20,19 @@ namespace FinalHealthTourism.Controllers
         public ActionResult HospitalAdminLogin(HospitalAdmin ha)
         {
             var admin = db.HospitalAdmins.FirstOrDefault(m => m.Id == ha.Id && m.Password == ha.Password);
+
             if (admin != null)
             {
-                TempData["currentHospitalAdmin"] = admin.Id;
-                return View("HospitalAdminDashboard");
+                var doctorsInHospital = db.Doctors.Where(d => d.HospitalAssociated == admin.HospitalName).ToList();
+                TempData["currentHospitalAdmin"] = admin.HospitalName;
+                return View("HospitalAdminDashboard", doctorsInHospital);
             }
             else
             {
-                ViewBag.Message = "Login Not Successful";
+                ViewBag.Message = "Username or Password is Incorrect";
+                return View();
             }
 
-            return View();
         }
 
         public ActionResult HospitalAdminSignUp()
@@ -45,8 +47,10 @@ namespace FinalHealthTourism.Controllers
                 ha.IsApproved = false;
                 db.HospitalAdmins.Add(ha);
                 db.SaveChanges();
+                return View("Success");
             }
-            return View("Success");
+
+            return View();
         }
         [HttpPost]
         public string Approve(string id)
@@ -55,6 +59,29 @@ namespace FinalHealthTourism.Controllers
             HAdminToBeApproved.IsApproved = true;
             db.SaveChanges();
             return "Approved";
+        }
+        [HttpPost]
+        public string Reject(string id)
+        {
+            var HAdminToBeApproved = db.HospitalAdmins.Single(ha => ha.Id == id);
+            HAdminToBeApproved.IsApproved = false;
+            db.SaveChanges();
+            return "Approved";
+        }
+
+        public ActionResult UpdateSchedule(string id)
+        {
+            var doctor = db.Doctors.FirstOrDefault(x => x.Id == id);
+            return View(doctor);
+        }
+        [HttpPost]
+        public ActionResult UpdateSchedule(Doctor d)
+        {
+            var doctor = db.Doctors.FirstOrDefault(x => x.Id == d.Id);
+            doctor.FromDateTimeAvailable = d.FromDateTimeAvailable;
+            doctor.ToDateTimeAvailable = d.ToDateTimeAvailable;
+            db.SaveChanges();
+            return View("UpdateSuccessful");
         }
     }
 }

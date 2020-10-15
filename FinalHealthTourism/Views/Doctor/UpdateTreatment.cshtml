@@ -1,0 +1,82 @@
+﻿@model FinalHealthTourism.ViewModels.TreatmentViewModel
+@{
+    ViewBag.Title = "UpdateTreatment";
+    Layout = "~/Views/Shared/_LogoutLayout.cshtml";
+}
+
+<h2>Update Treatment</h2>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.FirstName)
+                @Html.DisplayFor(model => model.Patient.FirstName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.LastName)
+                @Html.DisplayFor(model => model.Patient.LastName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.Gender)
+                @Html.DisplayFor(model => model.Patient.Gender)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.ContactNumber)
+                @Html.DisplayFor(model => model.Patient.ContactNumber)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.Email)
+                @Html.DisplayFor(model => model.Patient.Email)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.DateOfBirth)
+                @Html.DisplayFor(model => model.Patient.DateOfBirth)
+        </div>
+    </div>
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TreatmentRecord.DiagnosisDetails, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TreatmentRecord.DiagnosisDetails, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TreatmentRecord.DiagnosisDetails, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TreatmentRecord.TreatmentPlanned, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TreatmentRecord.TreatmentPlanned, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TreatmentRecord.TreatmentPlanned, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TreatmentRecord.MedicinesPrescribed, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TreatmentRecord.MedicinesPrescribed, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TreatmentRecord.MedicinesPrescribed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TreatmentRecord.RevisitDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.TreatmentRecord.RevisitDate, new { @class = "form-control date-picker", placeholder = "Enter Revisit date here..." })
+                @Html.ValidationMessageFor(model => model.TreatmentRecord.RevisitDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('.date-picker').datepicker();
+    })
+</script>
